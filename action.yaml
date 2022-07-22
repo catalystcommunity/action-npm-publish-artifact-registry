@@ -33,6 +33,8 @@ runs:
     - name: Configure NPM
       shell: bash
       run: |
+        gcloud config set artifacts/repository ${{ inputs.repository }}
+        gcloud config set artifacts/location ${{ inputs.region }}
         gcloud artifacts print-settings npm --scope=${{ inputs.scope }} >> ./npmrc
         npx google-artifactregistry-auth
         npm publish
