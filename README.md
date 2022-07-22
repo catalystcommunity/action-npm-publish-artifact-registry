@@ -1,11 +1,11 @@
 <!-- start title -->
 
-# GitHub Action:Hello World
+# GitHub Action:Publish NPM Package to Google Artifact Registry
 
 <!-- end title -->
 <!-- start description -->
 
-Greet someone
+Publishes an npm package to Google Artifact Registry
 
 <!-- end description -->
 <!-- start contents -->
@@ -13,19 +13,36 @@ Greet someone
 <!-- start usage -->
 
 ```yaml
-- uses: catalystsquad/action-composite-action-template@undefined
+- uses: catalystsquad/action-npm-publish-artifact-registry@undefined
   with:
-    # Who to greet
-    # Default: World
-    who-to-greet: ""
+    # gcloud service account credentials json
+    credentials-json: ""
+
+    # gcloud project id
+    project-id: ""
+
+    # artifact registry region
+    # Default: us-west1
+    region: ""
+
+    # artifact registry repository
+    # Default: npm
+    repository: ""
+
+    # scope to use when publishing
+    scope: ""
 ```
 
 <!-- end usage -->
 <!-- start inputs -->
 
-| **Input**          | **Description** | **Default** | **Required** |
-| :----------------- | :-------------- | :---------: | :----------: |
-| **`who-to-greet`** | Who to greet    |   `World`   |   **true**   |
+| **Input**              | **Description**                         | **Default** | **Required** |
+| :--------------------- | :-------------------------------------- | :---------: | :----------: |
+| **`credentials-json`** | gcloud service account credentials json |             |   **true**   |
+| **`project-id`**       | gcloud project id                       |             |   **true**   |
+| **`region`**           | artifact registry region                | `us-west1`  |  **false**   |
+| **`repository`**       | artifact registry repository            |    `npm`    |  **false**   |
+| **`scope`**            | scope to use when publishing            |             |   **true**   |
 
 <!-- end inputs -->
 <!-- start outputs -->
