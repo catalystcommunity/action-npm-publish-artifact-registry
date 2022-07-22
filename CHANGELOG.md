@@ -1,3 +1,11 @@
+# 1.0.0 (2022-07-22)
+
+
+### Bug Fixes
+
+* Initial commit ([545a627](https://github.com/catalystsquad/action-npm-publish-artifact-registry/commit/545a62757a017da555f299276ac3e8cad642679c))
+* Initial commit ([#1](https://github.com/catalystsquad/action-npm-publish-artifact-registry/issues/1)) ([e91becb](https://github.com/catalystsquad/action-npm-publish-artifact-registry/commit/e91becb182283e4ddbcd84d9b73231bb77029720))
+
 # 1.0.0 (2022-02-28)
 
 
