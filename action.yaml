@@ -1,22 +1,38 @@
-name: 'Hello World' # taken from https://docs.github.com/en/actions/creating-actions/creating-a-composite-action
-description: 'Greet someone'
+name: Publish NPM Package to Google Artifact Registry
+description: 'Publishes an npm package to Google Artifact Registry'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  credentials-json:
+    description: 'gcloud service account credentials json'
     required: true
-    default: 'World'
-outputs:
-  random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-id }}
+  project-id:
+    description: 'gcloud project id'
+    required: true
+  region:
+    description: 'artifact registry region'
+    required: false
+    default: 'us-west1'
+  repository:
+    description: 'artifact registry repository'
+    required: false
+    default: 'npm'
+  scope:
+    description: 'scope to use when publishing'
+    required: true
 runs:
-  using: "composite"
+  using: composite
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
+    - uses: crazy-max/ghaction-dump-context@v1
+    - uses: actions/checkout@v2
+    - id: auth
+      uses: google-github-actions/auth@v0
+      with:
+        credentials_json: ${{ inputs.credentials-json }}
+    - uses: google-github-actions/setup-gcloud@v0.3.0
+      with:
+        project_id: ${{ inputs.project-id }}
+    - name: Configure NPM
       shell: bash
-    - id: random-number-generator
-      run: echo "::set-output name=random-id::$(echo $RANDOM)"
-      shell: bash
-    - run: ${{ github.action_path }}/goodbye.sh
-      shell: bash
-
+      run: |
+        gcloud artifacts print-settings npm --scope=${{ inputs.scope }} >> ./npmrc
+        npx google-artifactregistry-auth
+        npm publish
