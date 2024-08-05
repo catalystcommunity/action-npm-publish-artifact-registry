@@ -13,7 +13,7 @@ Publishes an npm package to Google Artifact Registry
 <!-- start usage -->
 
 ```yaml
-- uses: catalystsquad/action-npm-publish-artifact-registry@undefined
+- uses: catalystcommunity/action-npm-publish-artifact-registry@undefined
   with:
     # gcloud service account credentials json
     credentials-json: ""
